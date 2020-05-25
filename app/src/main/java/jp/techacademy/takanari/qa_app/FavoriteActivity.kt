@@ -2,6 +2,7 @@ package jp.techacademy.takanari.qa_app
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import android.util.Base64  //追加する
 import android.widget.ListView
@@ -16,6 +17,9 @@ class FavoriteActivity : AppCompatActivity(){
     private lateinit var mQuestionArrayList: ArrayList<Question>
     private lateinit var mAdapter: QuestionsListAdapter
     private lateinit var mFavoriteRef:DatabaseReference
+//    private lateinit var mToolbar: Toolbar
+
+
 
     var favuid = ""
 
@@ -117,6 +121,7 @@ class FavoriteActivity : AppCompatActivity(){
             //ログインされてたらuidをセットする
             favuid = user.uid
         }
+
         // Firebase
         mDatabaseReference = FirebaseDatabase.getInstance().reference
         // ListViewの準備
@@ -133,15 +138,22 @@ class FavoriteActivity : AppCompatActivity(){
             intent.putExtra("question", mQuestionArrayList[position])
             startActivity(intent)
         }
+        // 選択したジャンルにリスナーを登録する
+//        if (mGenreRef != null) {
+//            mGenreRef!!.removeEventListener(mFavoriteListener)
+//        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         // 質問のリストをクリアしてから再度Adapterにセットし、AdapterをListViewにセットし直す
         mQuestionArrayList.clear()
         mAdapter.setQuestionArrayList(mQuestionArrayList)
         mListView1.adapter = mAdapter
-//        // 選択したジャンルにリスナーを登録する
-//        if (mGenreRef != null) {
-//            mGenreRef!!.removeEventListener(mEventListener)
-//        }
-        mGenreRef = mDatabaseReference.child(ContentsPATH).child(mGenre.toString())
-        mGenreRef!!.addChildEventListener(mFavoriteListener)
+        for (mGenre1 in 1..4) {
+            mGenreRef = mDatabaseReference.child(ContentsPATH).child(mGenre1.toString())
+            mGenreRef!!.addChildEventListener(mFavoriteListener)
+        }
+
     }
 }

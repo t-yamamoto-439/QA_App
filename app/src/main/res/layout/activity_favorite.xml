@@ -6,10 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".FavoriteActivity">
 
+
+
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listView1" />
+        android:id="@+id/listView1">
+    </ListView>
+<!--        app:layout_constraintTop_toBottomOf="@+id/include"/>-->
 
 
 </android.support.constraint.ConstraintLayout>

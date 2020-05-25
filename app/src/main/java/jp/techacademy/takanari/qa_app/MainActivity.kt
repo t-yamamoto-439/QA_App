@@ -215,7 +215,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             mToolbar.title = "コンピューター"
             mGenre = 4
         }else if (id == R.id.nav_fav) {
-            mToolbar.title = "お気に入り"
+//            mToolbar.title = "お気に入り"
             val intent = Intent(applicationContext, FavoriteActivity::class.java)
             startActivity(intent)
         }
